@@ -64,19 +64,20 @@ export default function UploadPage() {
 
   return (
     <div className="container" style={{ maxWidth: 600 }}>
-      <h1>Upload Video</h1>
+      <div className="card" style={{ padding: '2rem' }}>
+        <h1>Upload Video</h1>
 
-      {status === 'success' && (
-        <div className="alert alert-success">
-          Upload complete! Redirecting to video list…
-        </div>
-      )}
+        {status === 'success' && (
+          <div className="alert alert-success">
+            Upload complete! Redirecting to video list…
+          </div>
+        )}
 
-      {errorMessage && (
-        <div className="alert alert-error">
-          {errorMessage}
-        </div>
-      )}
+        {errorMessage && (
+          <div className="alert alert-error">
+            {errorMessage}
+          </div>
+        )}
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '1rem' }}>
@@ -128,20 +129,8 @@ export default function UploadPage() {
 
         {uploadProgress !== null && status === 'uploading' && (
           <div style={{ marginBottom: '1rem' }}>
-            <div style={{ background: '#e9ecef', borderRadius: 4, overflow: 'hidden', height: 24 }}>
-              <div
-                style={{
-                  width: `${uploadProgress}%`,
-                  background: '#007bff',
-                  height: '100%',
-                  transition: 'width 0.2s',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: '#fff',
-                  fontSize: '0.8rem',
-                }}
-              >
+            <div className="progress-bar-container">
+              <div className="progress-bar" style={{ width: `${uploadProgress}%` }}>
                 {uploadProgress}%
               </div>
             </div>
@@ -156,6 +145,7 @@ export default function UploadPage() {
           {isSubmitting ? 'Uploading…' : 'Upload'}
         </button>
       </form>
+      </div>
     </div>
   );
 }

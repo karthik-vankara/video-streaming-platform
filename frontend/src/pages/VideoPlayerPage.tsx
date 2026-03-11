@@ -73,20 +73,22 @@ export default function VideoPlayerPage() {
         </div>
       )}
 
-      <div style={{ marginTop: '1.5rem' }}>
+      <div className="card" style={{ marginTop: '1.5rem', padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-          <h1 style={{ margin: 0 }}>{video.title}</h1>
+          <h2 style={{ margin: 0 }}>{video.title}</h2>
           <StatusBadge status={video.status} />
         </div>
-        {video.description && <p style={{ color: '#555' }}>{video.description}</p>}
-        <div style={{ fontSize: '0.85rem', color: '#888', marginTop: '0.5rem' }}>
-          Uploaded {new Date(video.createdAt).toLocaleString()}
-          {video.fileSize && <> · {(video.fileSize / 1_048_576).toFixed(1)} MB</>}
+        {video.description && <p style={{ color: '#64748b', marginTop: '0.75rem' }}>{video.description}</p>}
+        <div style={{ fontSize: '0.875rem', color: '#94a3b8', marginTop: '0.75rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <span>📅 {new Date(video.createdAt).toLocaleString()}</span>
+          {video.fileSize && <span>💾 {(video.fileSize / 1_048_576).toFixed(1)} MB</span>}
         </div>
         {video.streams && video.streams.length > 0 && (
-          <div style={{ marginTop: '1rem', fontSize: '0.85rem' }}>
-            <strong>Available streams:</strong>{' '}
-            {video.streams.map((s) => s.resolution).join(', ')}
+          <div style={{ marginTop: '1rem', padding: '0.75rem', background: '#f8fafc', borderRadius: '8px', fontSize: '0.875rem' }}>
+            <strong>Available resolutions:</strong>{' '}
+            <span style={{ color: '#6366f1', fontWeight: 600 }}>
+              {video.streams.map((s) => s.resolution).join(', ')}
+            </span>
           </div>
         )}
       </div>
