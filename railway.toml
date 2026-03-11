@@ -1,28 +1,11 @@
 # Railway Deployment Configuration
 # This file tells Railway how to build and deploy the video streaming platform
 
-# Build configuration
 [build]
-# Tell Railway to use Docker Compose instead of Railpack
-# Railway will read docker-compose.yml and build/start all services
+# Tell Railway to use Docker instead of Railpack
 builder = "docker"
 
 [build.docker]
 # Build using docker-compose.yml
 context = "."
-# Optional: specify the compose file explicitly
 dockerfile = "docker-compose.yml"
-
-# Deploy configuration
-[deploy]
-# Use docker-compose for orchestration
-startCommand = ""  # docker-compose handles this
-# The services will be started via docker-compose automatically
-
-# Optional: health check settings
-healthcheck = {
-  type = "http",
-  path = "/api/v1/videos?size=1",
-  port = 8080,
-  # Wait for backend to be healthy
-}
