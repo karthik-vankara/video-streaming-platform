@@ -26,7 +26,7 @@ r2:
   public-url: ${R2_PUBLIC_URL:https://pub-hash.r2.dev}
 
 cors:
-  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000}
 
 logging:
   level:
