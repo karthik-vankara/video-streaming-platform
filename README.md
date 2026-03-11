@@ -2,6 +2,9 @@
 
 A full-stack video upload, processing, and streaming platform built with **Spring Boot, React, FFmpeg, and Cloudflare R2**. Upload a video and watch it stream via adaptive HLS bitrate in real-time.
 
+**Hosted demo:** https://video-streaming-platform-production-3f7a.up.railway.app/
+
+
 **Branch**: `001-video-streaming-platform` | **Status**: ✅ Fully Implemented
 
 ---
