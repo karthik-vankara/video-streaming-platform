@@ -390,6 +390,35 @@ curl http://localhost:8080/api/v1/videos?page=0&size=20
 | **PostgreSQL** | 5432 | Persistent storage for videos and streams metadata |
 | **R2** | HTTPS | Original video storage, processed HLS assets, thumbnails, public URLs |
 
+### Deployment Structure
+
+The project uses two distinct deployment modes:
+
+1. **Local development (Docker Compose)**
+   - Four separate containers: `db`, `backend`, `worker`, `frontend`.
+   - Each Java service has its own image built from a focused Dockerfile.
+   - Containers communicate over the default compose network.
+   - Useful for development, debugging, and CI integration.
+
+2. **Single‑container production (Railway, other PaaS)**
+   - An all‑in‑one root `Dockerfile` builds backend, worker, and frontend in
+     three build stages and then packages them together.
+   - `supervisord` runs three processes in the final image:
+     * Java backend on port **8080**
+     * Java worker (no external port) with periodic polling
+     * `nginx` serving the SPA on port **3000**, proxying `/api` → backend
+   - `deploy/start.sh` is the container entrypoint—it converts the
+     `DATABASE_URL`, writes environment variables to `/app/env.sh`, and
+     launches `supervisord`.
+   - `railway.json` contains `{ "build": { "builder": "dockerfile" } }`
+     which forces Railway to use the root Dockerfile instead of auto‑detecting.
+   - This single image simplifies deployment to platforms that only allow one
+     process per service and avoids cross‑container networking issues.
+
+> Tip: the **Docker Compose** setup is still the recommended way to work
+> locally; the single‑container image is specifically for cloud deployment
+> (Railway, Heroku, etc.) where you can’t run multiple containers.
+
 ### Data Flow — Upload to Playback
 
 ```
