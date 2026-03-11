@@ -12,15 +12,8 @@ export default function StatusBadge({ status }: { status: VideoStatus }) {
   const style = STATUS_STYLES[status] ?? STATUS_STYLES.UPLOADING;
   return (
     <span
-      style={{
-        display: 'inline-block',
-        padding: '0.2rem 0.6rem',
-        borderRadius: 12,
-        fontSize: '0.75rem',
-        fontWeight: 600,
-        background: style.background,
-        color: style.color,
-      }}
+      className="status-badge"
+      style={{ background: style.background, color: style.color }}
     >
       {style.label}
     </span>

@@ -34,12 +34,12 @@ export default function VideoPlayerPage() {
     }
   }
 
-  if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading…</div>;
-  if (error) return <div style={{ padding: '2rem', color: '#721c24' }}>{error}</div>;
-  if (!video) return <div style={{ padding: '2rem' }}>Video not found.</div>;
+  if (loading) return <div className="container" style={{ padding: '2rem', textAlign: 'center' }}>Loading…</div>;
+  if (error) return <div className="container" style={{ padding: '2rem', color: '#721c24' }}>{error}</div>;
+  if (!video) return <div className="container" style={{ padding: '2rem' }}>Video not found.</div>;
 
   return (
-    <div style={{ maxWidth: 900, margin: '2rem auto', padding: '0 1rem' }}>
+    <div className="container">
       {video.status === 'READY' && video.masterPlaylistUrl ? (
         <VideoPlayer src={video.masterPlaylistUrl} />
       ) : (
@@ -64,14 +64,7 @@ export default function VideoPlayerPage() {
               <button
                 onClick={handleRetry}
                 disabled={retrying}
-                style={{
-                  padding: '0.5rem 1.5rem',
-                  background: '#dc3545',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: 4,
-                  cursor: retrying ? 'not-allowed' : 'pointer',
-                }}
+                className={`btn btn-danger ${retrying ? 'btn-disabled' : ''}`}
               >
                 {retrying ? 'Retrying…' : 'Retry Processing'}
               </button>

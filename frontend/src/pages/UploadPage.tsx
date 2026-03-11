@@ -63,17 +63,17 @@ export default function UploadPage() {
   const isSubmitting = status === 'uploading';
 
   return (
-    <div style={{ maxWidth: 600, margin: '2rem auto', padding: '0 1rem' }}>
+    <div className="container" style={{ maxWidth: 600 }}>
       <h1>Upload Video</h1>
 
       {status === 'success' && (
-        <div style={{ padding: '1rem', background: '#d4edda', borderRadius: 4, marginBottom: '1rem' }}>
+        <div className="alert alert-success">
           Upload complete! Redirecting to video list…
         </div>
       )}
 
       {errorMessage && (
-        <div style={{ padding: '1rem', background: '#f8d7da', borderRadius: 4, marginBottom: '1rem', color: '#721c24' }}>
+        <div className="alert alert-error">
           {errorMessage}
         </div>
       )}
@@ -151,16 +151,7 @@ export default function UploadPage() {
         <button
           type="submit"
           disabled={isSubmitting || !title.trim() || !file}
-          style={{
-            padding: '0.6rem 1.5rem',
-            fontSize: '1rem',
-            cursor: isSubmitting ? 'not-allowed' : 'pointer',
-            background: '#007bff',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 4,
-            opacity: isSubmitting || !title.trim() || !file ? 0.6 : 1,
-          }}
+          className={`btn btn-primary ${isSubmitting || !title.trim() || !file ? 'btn-disabled' : ''}`}
         >
           {isSubmitting ? 'Uploading…' : 'Upload'}
         </button>

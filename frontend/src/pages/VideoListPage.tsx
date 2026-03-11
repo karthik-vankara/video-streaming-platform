@@ -19,11 +19,11 @@ export default function VideoListPage() {
       .finally(() => setLoading(false));
   }, [page]);
 
-  if (loading) return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading…</div>;
-  if (error) return <div style={{ padding: '2rem', color: '#721c24' }}>{error}</div>;
+  if (loading) return <div className="container" style={{padding:'2rem', textAlign:'center'}}>Loading…</div>;
+  if (error) return <div className="container" style={{padding:'2rem', color:'#721c24'}}>{error}</div>;
   if (!data || data.content.length === 0) {
     return (
-      <div style={{ maxWidth: 800, margin: '2rem auto', padding: '0 1rem', textAlign: 'center' }}>
+      <div className="container" style={{textAlign:'center'}}>
         <h1>Video Library</h1>
         <p>No videos yet. <Link to="/upload">Upload one!</Link></p>
       </div>
@@ -31,24 +31,22 @@ export default function VideoListPage() {
   }
 
   return (
-    <div style={{ maxWidth: 900, margin: '2rem auto', padding: '0 1rem' }}>
+    <div className="container">
       <h1>Video Library</h1>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.5rem' }}>
+      <div className="grid">
         {data.content.map((video) => (
           <Link
             key={video.id}
             to={video.status === 'READY' ? `/videos/${video.id}` : '#'}
+            className="card"
             style={{
               textDecoration: 'none',
               color: 'inherit',
-              border: '1px solid #ddd',
-              borderRadius: 8,
-              overflow: 'hidden',
-              display: 'flex',
-              flexDirection: 'column',
               cursor: video.status === 'READY' ? 'pointer' : 'default',
               opacity: video.status === 'READY' ? 1 : 0.8,
+              display:'flex',
+              flexDirection:'column'
             }}
           >
             <div
@@ -72,7 +70,7 @@ export default function VideoListPage() {
               )}
             </div>
             <div style={{ padding: '0.75rem' }}>
-              <div style={{ fontWeight: 600, marginBottom: 4, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div className="video-card-title">
                 {video.title}
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -87,11 +85,11 @@ export default function VideoListPage() {
       </div>
 
       {data.totalPages > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2rem' }}>
+        <div className="pagination">
           <button
             onClick={() => setPage((p) => Math.max(0, p - 1))}
             disabled={page === 0}
-            style={{ padding: '0.5rem 1rem' }}
+            className={page===0 ? 'btn btn-disabled' : ''}
           >
             Previous
           </button>
@@ -101,7 +99,7 @@ export default function VideoListPage() {
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={page >= data.totalPages - 1}
-            style={{ padding: '0.5rem 1rem' }}
+            className={page>=data.totalPages-1 ? 'btn btn-disabled' : ''}
           >
             Next
           </button>
