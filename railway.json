@@ -1,0 +1,21 @@
+{
+  "$schema": "https://railway.app/json-schema/railway.json",
+  "build": {
+    "builder": "dockerfile"
+  },
+  "deploy": {
+    "restartPolicyMaxRetries": 5,
+    "restartPolicyWindowMs": 60000
+  },
+  "variables": {
+    "R2_ACCOUNT_ID": "",
+    "R2_ACCESS_KEY_ID": "",
+    "R2_SECRET_ACCESS_KEY": "",
+    "R2_BUCKET_NAME": "video-platform",
+    "R2_PUBLIC_URL": "",
+    "CORS_ALLOWED_ORIGINS": "",
+    "DATABASE_URL": "",
+    "PGUSER": "",
+    "PGPASSWORD": ""
+  }
+}
