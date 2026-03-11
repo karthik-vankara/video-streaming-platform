@@ -1,0 +1,35 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/videoplatform}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:postgres}
+    hikari:
+      maximum-pool-size: ${HIKARI_MAX_POOL:5}
+      minimum-idle: 2
+      connection-timeout: 20000
+      idle-timeout: 300000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+
+r2:
+  account-id: ${R2_ACCOUNT_ID:your-account-id}
+  access-key-id: ${R2_ACCESS_KEY_ID:your-access-key}
+  secret-access-key: ${R2_SECRET_ACCESS_KEY:your-secret-key}
+  bucket-name: ${R2_BUCKET_NAME:video-platform}
+  public-url: ${R2_PUBLIC_URL:https://pub-hash.r2.dev}
+
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+
+logging:
+  level:
+    com.videoplatform: ${LOG_LEVEL:INFO}
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %level [%thread] %logger{36} - %msg%n"
