@@ -6,10 +6,8 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 
-# Maven
-.mvn/
-mvnw
-mvnw.cmd
+# Maven (keep .mvn/wrapper and mvnw — needed for builds)
+.mvn/repository/
 
 # Node.js
 node_modules/
