@@ -9,18 +9,16 @@ FROM eclipse-temurin:21-jdk-alpine AS backend-build
 WORKDIR /app
 COPY backend/.mvn .mvn
 COPY backend/mvnw backend/pom.xml ./
-RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
 COPY backend/src src
-RUN ./mvnw -DskipTests clean package -B
+RUN chmod +x mvnw && ./mvnw -DskipTests clean package -B
 
 # ── Stage 2: Build worker JAR ──
 FROM eclipse-temurin:21-jdk-alpine AS worker-build
 WORKDIR /app
 COPY worker/.mvn .mvn
 COPY worker/mvnw worker/pom.xml ./
-RUN chmod +x mvnw && ./mvnw dependency:go-offline -B
 COPY worker/src src
-RUN ./mvnw -DskipTests clean package -B
+RUN chmod +x mvnw && ./mvnw -DskipTests clean package -B
 
 # ── Stage 3: Build frontend static files ──
 FROM node:20-alpine AS frontend-build
