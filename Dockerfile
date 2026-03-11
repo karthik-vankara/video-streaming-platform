@@ -61,8 +61,7 @@ COPY deploy/supervisord.conf /etc/supervisord.conf
 COPY deploy/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
-# Railway injects PORT; nginx listens on it
-# Backend runs on 8080 internally, worker on 8081
-EXPOSE ${PORT:-3000}
+# Nginx on 3000, backend on 8080, worker on 8081
+EXPOSE 3000
 
 CMD ["/app/start.sh"]
