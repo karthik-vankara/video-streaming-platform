@@ -36,16 +36,16 @@ public class FfmpegService {
 
         if ("360p".equals(resolution)) {
             scale = "scale=640:360:force_original_aspect_ratio=decrease,pad=640:360:(ow-iw)/2:(oh-ih)/2";
-            crf = "28";
-            maxrate = "800k";
-            bufsize = "1200k";
-            audioBitrate = "96k";
+            crf = "30";
+            maxrate = "600k";
+            bufsize = "900k";
+            audioBitrate = "64k";
         } else {
             scale = "scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2";
-            crf = "23";
-            maxrate = "2500k";
-            bufsize = "5000k";
-            audioBitrate = "128k";
+            crf = "26";
+            maxrate = "1500k";
+            bufsize = "2000k";
+            audioBitrate = "96k";
         }
 
         String segmentPattern = outputDir.resolve("segment_%03d.ts").toString();
@@ -54,7 +54,7 @@ public class FfmpegService {
         ProcessBuilder pb = new ProcessBuilder(
                 ffmpegPath, "-i", inputFile.toString(),
                 "-vf", scale,
-                "-c:v", "libx264", "-preset", "medium", "-crf", crf,
+                "-c:v", "libx264", "-preset", "ultrafast", "-crf", crf,
                 "-maxrate", maxrate, "-bufsize", bufsize,
                 "-c:a", "aac", "-b:a", audioBitrate, "-ac", "2",
                 "-g", "48", "-keyint_min", "48", "-sc_threshold", "0",
